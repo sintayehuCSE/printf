@@ -6,23 +6,26 @@
  *  to perform the formater
  * @ind: The index of character after format specifier
  * @arg_list: The list of variable argument to be printed
+ * @array: An array that will reserve a bufer for storing characters
  *
  * Return: 1 or 2
  */
-int print_format(const char *format, int *ind, va_list arg_list)
+int print_format(const char *format, int *ind, va_list arg_list, char array[])
 {
 	int i = 0, len = 0, invalid_format = -1;
 	type fmt_typ[] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_percent},
+		{'d', print_number},
+		{'i', print_number},
 		{'\0', NULL}
 	};
 
 	for (; fmt_typ[i].fmt != '\0'; i++)
 	{
 		if (format[*ind] == fmt_typ[i].fmt)
-			return (fmt_typ[i].func(arg_list));
+			return (fmt_typ[i].func(arg_list, array));
 	}
 	if (fmt_typ[i].fmt == '\0')
 	{
