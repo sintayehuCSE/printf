@@ -34,9 +34,10 @@ int print_char(va_list, char[]);
 int print_string(va_list, char[]);
 int print_percent(va_list, char[]);
 int print_number(va_list, char[]);
+int print_binary(va_list, char[]);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
 int write_char(char c);
-int write_number(int, char *, int);
+int write_number(int, char[], int);
 
 #endif /* MAIN_H */

@@ -19,6 +19,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[])
 		{'%', print_percent},
 		{'d', print_number},
 		{'i', print_number},
+		{'b', print_binary},
 		{'\0', NULL}
 	};
 

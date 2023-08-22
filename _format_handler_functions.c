@@ -76,3 +76,38 @@ int print_number(va_list ap, char array[])
 	i++;
 	return (write_number(is_ngtive, array, i));
 }
+/**
+ * print_binary - Convert unsigned int argument to binary
+ * @ap: The variable argument
+ * @array: A buffer to store the binary digits
+ *
+ * Return: The number of characters printed
+ */
+int print_binary(va_list ap, char array[])
+{
+	unsigned int u_int_num = va_arg(ap, unsigned int);
+	int i = BUFFER_SIZE - 2;
+	int printed_digit = 0;
+
+	array[BUFFER_SIZE - 1] = '\0';
+	if (u_int_num != 0)
+	{
+		while (u_int_num)
+		{
+			array[i] = (u_int_num % 2) + '0';
+			i--;
+			u_int_num /= 2;
+		}
+		i++;
+	}
+	else
+	{
+		array[i] = '0';
+	}
+	while (i < (BUFFER_SIZE - 1))
+	{
+		printed_digit += _putchar(array[i]);
+		i++;
+	}
+	return (printed_digit);
+}
