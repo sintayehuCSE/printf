@@ -66,10 +66,10 @@ int print_hexa_lower(va_list ap, char array[], int size)
 {
 	int i = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(ap, unsigned long int);
-	char base_digit_lower[] = "0123456789abcdef"
+	char base_digit_lower[] = "0123456789abcdef";
 
 	num = cast_hexa_lower(num, size);
-	array[BUFFER_SIZE - 1] = '\0'
+	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
 		array[i] = '0';
 	while (num > 0)

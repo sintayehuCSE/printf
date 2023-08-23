@@ -73,7 +73,7 @@ int write_octal(char array[], int index, int size)
  *
  * Return: Number of lowercase hexa digit printed
  */
-int write_hexa_lower(char array[], int index, int size);
+int write_hexa_lower(char array[], int index, int size)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 

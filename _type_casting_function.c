@@ -37,7 +37,7 @@ long int cast_octal(unsigned long int num, int size)
  *
  * Return: The number in the form of required type
  */
-long int cast_hexa_lower(unsigned int num, int size);
+long int cast_hexa_lower(unsigned int num, int size)
 {
 	if (size == LONG_SIZE)
 		return (num);
