@@ -43,7 +43,7 @@ long int cast_hexa_lower(unsigned int num, int size);
 		return (num);
 	else if (size == SHORT_SIZE)
 		return ((unsigned short)num);
-	return ((unsigned int )num);
+	return ((unsigned int)num);
 }
 /**
  * cast_hexa_upper - casts a number to the required type

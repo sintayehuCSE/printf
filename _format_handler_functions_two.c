@@ -80,7 +80,7 @@ int print_hexa_lower(va_list ap, char array[], int size)
 		if (num == 0)
 			i++;
 	}
-	return (write_hexa_lower(array, i, size))
+	return (write_hexa_lower(array, i, size));
 }
 /**
  * print_hexa_upper - print number in uppercase hexadecimal number system
