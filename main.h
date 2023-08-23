@@ -40,12 +40,14 @@ int print_number(va_list, char[], int);
 int print_binary(va_list, char[], int);
 int print_unsigned(va_list, char[], int);
 int print_octal(va_list, char[], int);
+int print_hexa_lower(va_list, char[], int);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
 int write_char(char c);
 int write_number(int, char[], int);
 int write_unsigned(char[], int, int);
 int write_octal(char[], int, int);
+int write_hexa_lower(char[], int, int);
 
 /* .............LIST OF FUNCTIONS TO DETERMINE SPECIFIERS OPTIONS........... */
 int get_size(const char *format, int *index);
@@ -53,5 +55,6 @@ int get_size(const char *format, int *index);
 /* ............LIST OF FUNCTION FOR TYPE CASTING NUMBERS..................*/
 long int cast_unsigned(unsigned long int num, int size);
 long int cast_octal(unsigned long int num, int size);
+long int cast_hexa_lower(unsigned int num, int size);
 
 #endif /* MAIN_H */

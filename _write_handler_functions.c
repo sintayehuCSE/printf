@@ -65,3 +65,18 @@ int write_octal(char array[], int index, int size)
 	UNUSED(size);
 	return (write(1, &array[index], len));
 }
+/**
+ * write_hexa_lower - printout each digit of lowercase hexadecimal
+ * @array: Buffer that will store each lower case hexa digit
+ * @index: Index of the first hexa digit
+ * @size: Type casting specifier
+ *
+ * Return: Number of lowercase hexa digit printed
+ */
+int write_hexa_lower(char array[], int index, int size);
+{
+	int len = (BUFFER_SIZE - index) - 1;
+
+	UNUSED(size);
+	return (write(1, &array[index], len));
+}

@@ -24,6 +24,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		{'b', print_binary},
 		{'u', print_unsigned},
 		{'o', print_octal},
+		{'x', print_hexa_lower},
 		{'\0', NULL}
 	};
 
