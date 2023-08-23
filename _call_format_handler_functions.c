@@ -23,6 +23,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		{'i', print_number},
 		{'b', print_binary},
 		{'u', print_unsigned},
+		{'o', print_octal},
 		{'\0', NULL}
 	};
 

@@ -50,3 +50,18 @@ int write_unsigned(char array[], int index, int size)
 	UNUSED(size);
 	return (write(1, &array[index], len));
 }
+/**
+ * write_octal - Output each digit of octal number
+ * @array: Buffer that store each digit of octal number
+ * @index: An index to first digit of octal number
+ * @size: Type casting specifier
+ *
+ * Return: The number of base digit printed
+ */
+int write_octal(char array[], int index, int size)
+{
+	int len = (BUFFER_SIZE - index) - 1;
+
+	UNUSED(size);
+	return (write(1, &array[index], len));
+}
