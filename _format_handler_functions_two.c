@@ -82,3 +82,31 @@ int print_hexa_lower(va_list ap, char array[], int size)
 	}
 	return (write_hexa_lower(array, i, size))
 }
+/**
+ * print_hexa_upper - print number in uppercase hexadecimal number system
+ * @ap: Pointer to the variable argument
+ * @array: Buffer to store the uppercase hexa digit
+ * @size: Type casting specifier
+ *
+ * Return: Number of printed uppercase hexa digit
+ */
+int print_hexa_upper(va_list ap, char array[], int size)
+{
+	int i = BUFFER_SIZE - 2;
+	unsigned long int num = va_arg(ap, unsigned long int);
+	char base_digit_upper[] = "0123456789ABCDEF";
+
+	num = cast_hexa_upper(num, size);
+	array[BUFFER_SIZE - 1] = '\0';
+	if (num == 0)
+		array[i] = '0';
+	while (num > 0)
+	{
+		array[i] = base_digit_upper[num % 16];
+		i--;
+		num = num / 16;
+		if (num == 0)
+			i++;
+	}
+	return (write_hexa_upper(array, i, size));
+}

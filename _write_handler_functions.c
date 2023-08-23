@@ -80,3 +80,18 @@ int write_hexa_lower(char array[], int index, int size);
 	UNUSED(size);
 	return (write(1, &array[index], len));
 }
+/**
+ * write_hexa_upper - printout each digit of uppercase hexadecimal
+ * @array: Buffer that will store each upper case hexa digit
+ * @index: Index of the first hexa digit
+ * @size: Type casting specifier
+ *
+ * Return: Number of uppercase hexa digit printed
+ */
+int write_hexa_upper(char array[], int index, int size)
+{
+	int len = (BUFFER_SIZE - index) - 1;
+
+	UNUSED(size);
+	return (write(1, &array[index], len));
+}
