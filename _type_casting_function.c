@@ -6,7 +6,6 @@
  *
  * Return: The number in the form of required type
  */
-
 long int cast_unsigned(unsigned long int num, int size)
 {
 	if (size == LONG_SIZE)

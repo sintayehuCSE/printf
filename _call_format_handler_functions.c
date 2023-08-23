@@ -26,6 +26,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		{'o', print_octal},
 		{'x', print_hexa_lower},
 		{'X', print_hexa_upper},
+		{'S', print_non_printable},
 		{'\0', NULL}
 	};
 

@@ -1,12 +1,12 @@
 #include "main.h"
 /**
- * print_unsigned - Print each digit of unsigned number
- * @size: Determine the type of numbers to be used
- * @ap: Pointer to variable arguments
- * @array: A buffer to store digit of the argument
- *
- * Return: The number of digits in each unsigned number
- */
+* print_unsigned - Print each digit of unsigned number
+* @size: Determine the type of numbers to be used
+* @ap: Pointer to variable arguments
+* @array: A buffer to store digit of the argument
+*
+* Return: The number of digits in each unsigned number
+*/
 int print_unsigned(va_list ap, char array[], int size)
 {
 	int i = BUFFER_SIZE - 2;
@@ -109,4 +109,37 @@ int print_hexa_upper(va_list ap, char array[], int size)
 			i++;
 	}
 	return (write_hexa_upper(array, i, size));
+}
+/**
+ * print_non_printable - prints the non printable in argument and its chars
+ * @ap: Pointer to the variable argument
+ * @array: Buffer to store the uppercase hexa digit
+ * @size: Type casting specifier
+ *
+ * Return: The number of characters printed
+ */
+int print_non_printable(va_list ap, char array[], int size)
+{
+	int i = 0;
+	int j = 0;
+	char *str = va_arg(ap, char *);
+
+	UNUSED(size);
+	if (str == NULL)
+		return (write(1, "(null)", 6));
+	while (*(str + i) != '\0')
+	{
+		if (check_printable(str[i]))
+		{
+			array[j] = str[i];
+		}
+		else
+		{
+			add_hexa_code(array, &j, str[i]);
+		}
+		j++;
+		i++;
+	}
+	array[j] = '\0';
+	return (write_non_printable(array));
 }
