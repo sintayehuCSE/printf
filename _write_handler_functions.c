@@ -35,3 +35,18 @@ int write_number(int is_ngtive, char array[], int ind)
 	}
 	return (i);
 }
+/**
+ * write_unsigned - Prints each digit within unsigned numbers
+ * @array: The buffer that store each digit of unsinged number
+ * @index: Index of first digit of the unsigned number
+ * @size: Value to specify the type of the unsinged number
+ *
+ * Return: The number of digit and fillables printed
+ */
+int write_unsigned(char array[], int index, int size)
+{
+	int len = (BUFFER_SIZE - index) - 1;
+
+	UNUSED(size);
+	return (write(1, &array[index], len));
+}

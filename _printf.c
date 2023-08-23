@@ -8,6 +8,7 @@
 int _printf(const char *format, ...)
 {
 	int printed_char = 0, i = 0, printed = 0;
+	int size;
 	va_list arg_list;
 	char array[BUFFER_SIZE];
 
@@ -23,8 +24,9 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			size = get_size(format, &i);
 			++i;
-			printed = print_format(format, &i, arg_list, array);
+			printed = print_format(format, &i, arg_list, array, size);
 			if (printed == -1)
 				return (-1);
 			printed_char = printed_char + printed;

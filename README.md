@@ -1,1 +1,1 @@
-Welcome to printf project
+Welcome to the printf project
