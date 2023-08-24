@@ -27,6 +27,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		{'x', print_hexa_lower},
 		{'X', print_hexa_upper},
 		{'S', print_non_printable},
+		{'p', print_address},
 		{'\0', NULL}
 	};
 
