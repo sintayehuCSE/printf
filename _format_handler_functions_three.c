@@ -16,7 +16,7 @@ int print_address(va_list ap, char array[], int size)
 
 	UNUSED(size);
 	if (address == NULL)
-		return (write(1, "(null)", 6));
+		return (write(1, "(nil)", 5));
 	num = (unsigned long)address;
 	array[BUFFER_SIZE - 1] = '\0';
 	while (num > 0)
