@@ -22,3 +22,44 @@ int get_size(const char *format, int *index)
 		*index = nxt_indx;
 	return (size);
 }
+/**
+ * get_minus - Determine the flag minus option for formating
+ * @fmt: The pointer to the formating argument
+ * @index: Pointer to the index where need to look for formating arise
+ *
+ * Return: Ascii value of minus char
+*/
+int get_minus(const char *fmt, int *index)
+{
+	int nxt_indx = *index + 1;
+	char flag_in_chr[] = {'-', '+', '0', '#', ' ', '\0'};
+	int flag = 0, i = nxt_indx, space = 1;
+
+	for (i = 0; i < 5; i++)
+	{
+		if (fmt[*index + 2] == flag_in_chr[i])
+			space = 0;
+	}
+	i = nxt_indx;
+	if (fmt[i] == ' ')
+	{
+		if (space)
+			return (flag);
+	}
+	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	{
+		if (fmt[i] == 45)
+		{
+			flag = 45;
+			break;
+		}
+	}
+	return (flag);
+}
+/**
+ * get_plus - Determine the flag minus option for formating
+ * @fmt: The pointer to the formating argument
+ * @index: Pointer to the index where need to look for formating arise
+ *
+ * Return: Ascii value of plus char
+ */
