@@ -33,7 +33,7 @@ int write_non_printable(char array[])
 	return (write(1, array, len));
 }
 /**
- * Write_address - Printout the memory address of a variable
+ * write_address - Printout the memory address of a variable
  * @array: A buffer to store each hexa digit of the address
  * @index: The index to the first hexa digit
  *

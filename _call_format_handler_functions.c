@@ -8,11 +8,19 @@
  * @arg_list: The list of variable argument to be printed
  * @array: An array that will reserve a bufer for storing characters
  * @size: Determine the type of a number to be used
+ * @minus: Determine the minu flags
+ * @plus: Search for the plus flags
+ * @zero: The zero fill flag value
+ * @hash: The hash flag value
+ * @space: The space flag value
+ * @width: Value of a width to used for printing
+ * @precision: Value for precision flag
  *
  * Return: 1 or 2
  */
 int print_format(const char *format, int *ind, va_list arg_list, char array[],
-		 int size)
+		 int minus, int plus, int zero, int hash, int space, int size
+		 , int width, int precision)
 {
 	int i = 0, len = 0, invalid_format = -1;
 	type fmt_typ[] = {
@@ -34,7 +42,9 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 	for (; fmt_typ[i].fmt != '\0'; i++)
 	{
 		if (format[*ind] == fmt_typ[i].fmt)
-			return (fmt_typ[i].func(arg_list, array, size));
+			return (fmt_typ[i].func(arg_list, array, minus, plus,
+						zero, hash, space, size, width,
+					precision));
 	}
 	if (fmt_typ[i].fmt == '\0')
 	{

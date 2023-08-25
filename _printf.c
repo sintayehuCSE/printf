@@ -1,4 +1,5 @@
 #include "main.h"
+int get_delimiter(const char *fmt, int *index);
 /**
  * _printf - Prints a formatted output to the standard output stream
  * @format: A pointer to the format to be used for printing
@@ -7,8 +8,8 @@
  */
 int _printf(const char *format, ...)
 {
-	int printed_char = 0, i = 0, printed = 0;
-	int size;
+	int prntd_chr = 0, i = 0, prntd = 0, size, minus, plus, zero, hash;
+	int space, width, precision;
 	va_list arg_list;
 	char array[BUFFER_SIZE];
 
@@ -19,19 +20,59 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			_putchar(*(format + i));
-			printed_char++;
+			_putchar(*(format + i)), prntd_chr++;
 		}
 		else
 		{
 			size = get_size(format, &i);
-			++i;
-			printed = print_format(format, &i, arg_list, array, size);
-			if (printed == -1)
+			width = get_width(format, &i, arg_list);
+			precision = get_precision(format, &i, arg_list);
+			minus = get_minus(format, &i), plus = get_plus(format, &i);
+			hash = get_hash(format, &i), zero = get_zero(format, &i);
+			space = get_space(format, &i);
+			i = get_delimiter(format, &i);
+			prntd = print_format(format, &i, arg_list, array, minus,
+					       plus, zero, hash, space, size,
+					       width, precision);
+			if (prntd == -1)
 				return (-1);
-			printed_char = printed_char + printed;
+			prntd_chr = prntd_chr + prntd;
 		}
 	}
 	va_end(arg_list);
-	return (printed_char);
+	return (prntd_chr);
+}
+/**
+ * get_delimiter - Set the index to formating character
+ * @index: Pointer to the current character
+ * @fmt: Pointer to format string
+ *
+ * Return: Value of index that point to format delimiter
+ */
+int get_delimiter(const char *fmt, int *index)
+{
+	int i = 0;
+	char del;
+	int space = 1;
+	char flag_in_chr = {'-', '+', '0', '#', '\0'};
+
+	for (; i < 4; i++)
+	{
+		if (fmt[*index + 1] == ' ')
+			if (fmt[*index + 2] == flag_in_chr[i])
+				space = 0;
+	}
+	if (space)
+		return (*index + 1);
+	i = *index;
+	if (*index == 'l' || *index == 'h')
+		i++;
+	while (fmt[i] != '\0')
+	{
+		del = fmt[i];
+		if ((del > 64 && del < 91) || (del > 96 && del < 123))
+			break;
+		i++;
+	}
+	return (i);
 }
