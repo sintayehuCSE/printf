@@ -37,7 +37,7 @@ int _putchar(char c);
 int _printf(const char *format, ...);
 int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		 int minus, int plus, int zero, int hash, int space, int size
-		 ,int width, int precision);
+		 , int width, int precision);
 
 /* ................LIST OF FUNCTION TO HANDLE FORMATING.............. */
 int print_char(va_list, char[], int, int, int, int, int, int, int, int);
@@ -49,7 +49,8 @@ int print_unsigned(va_list, char[], int, int, int, int, int, int, int, int);
 int print_octal(va_list, char[], int, int, int, int, int, int, int, int);
 int print_hexa_lower(va_list, char[], int, int, int, int, int, int, int, int);
 int print_hexa_upper(va_list, char[], int, int, int, int, int, int, int, int);
-int print_non_printable(va_list, char[], int, int, int, int, int, int, int, int);
+int print_non_printable(va_list, char[], int, int, int, int, int, int, int,
+			int);
 int print_address(va_list, char[], int, int, int, int, int, int, int, int);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
