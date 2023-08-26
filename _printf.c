@@ -65,12 +65,13 @@ int get_delimiter(const char *fmt, int *index)
 	if (space)
 		return (*index + 1);
 	i = *index;
-	if (*index == 'l' || *index == 'h')
+	if (*index == 'l' || *index == 'h' || *index == '%')
 		i++;
 	while (fmt[i] != '\0')
 	{
 		del = fmt[i];
-		if ((del > 64 && del < 91) || (del > 96 && del < 123))
+		if ((del > 64 && del < 91) || (del > 96 && del < 123)
+		    || del == '%')
 			break;
 		i++;
 	}

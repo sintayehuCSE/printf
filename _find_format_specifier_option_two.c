@@ -32,7 +32,7 @@ int get_size(const char *format, int *index)
  */
 int get_width(const char *fmt, int *index, va_list ap)
 {
-	int i = *index, end, width = 0;
+	int i = *index, end = 0, width = 0;
 	char del;
 
 	if (fmt[i] == 'h' || fmt[i] == 'l' || fmt[i] == '%')
