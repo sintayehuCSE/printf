@@ -45,7 +45,7 @@ int _printf(const char *format, ...)
 /**
  * get_delimiter - Set the index to formating character
  * @index: Pointer to the current character
- * @fmt: Pointer to format string
+ * @fmt: Pointer to formating string
  *
  * Return: Value of index that point to format delimiter
  */
@@ -54,7 +54,7 @@ int get_delimiter(const char *fmt, int *index)
 	int i = 0;
 	char del;
 	int space = 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', '\0'};
+	char flag_in_chr[] = {'-', '+', '0', '#'};
 
 	for (; i < 4; i++)
 	{
@@ -63,7 +63,12 @@ int get_delimiter(const char *fmt, int *index)
 				space = 0;
 	}
 	if (space)
+	{
+		del = fmt[*index + 2];
+		if (del == 'd' || del == 'i')
+			return (*index + 2);
 		return (*index + 1);
+	}
 	i = *index;
 	if (*index == 'l' || *index == 'h' || *index == '%')
 		i++;

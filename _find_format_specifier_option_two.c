@@ -101,12 +101,12 @@ int get_precision(const char *fmt, int *index, va_list ap)
 		i++;
 	}
 	i++;
-	if (fmt[i] == '*')
+	if (fmt[i] == '*' && fmt[i - 1] != '\0')
 	{
 		precision = va_arg(ap, int);
 		return (precision);
 	}
-	while (fmt[i] != '\0')
+	while (fmt[i] != '\0' && fmt[i - 1] != '\0')
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123))
