@@ -54,7 +54,7 @@ int get_delimiter(const char *fmt, int *index)
 	int i = 0;
 	char del;
 	int space = 1;
-	char flag_in_chr = {'-', '+', '0', '#', '\0'};
+	char flag_in_chr[] = {'-', '+', '0', '#', '\0'};
 
 	for (; i < 4; i++)
 	{
