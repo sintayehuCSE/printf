@@ -61,6 +61,11 @@ int get_delimiter(const char *fmt, int *index)
 		if (fmt[*index + 1] == ' ')
 			if (fmt[*index + 2] == flag_in_chr[i])
 				space = 0;
+		if (fmt[*index + 1] != ' ')
+		{
+			space = 0;
+			break;
+		}
 	}
 	if (space)
 	{
@@ -70,13 +75,18 @@ int get_delimiter(const char *fmt, int *index)
 		return (*index + 1);
 	}
 	i = *index;
-	if (*index == 'l' || *index == 'h' || *index == '%')
+	if (fmt[i] == 'l' || fmt[i] == 'h' || fmt[i] == '%')
 		i++;
 	while (fmt[i] != '\0')
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
 		    || del == '%')
+			break;
+		else if (del > 90 && del < 97)
+			break;
+		else if ((del > 32 && del < 48) && (del != '+' && del != '-' &&
+				  del != '#'))
 			break;
 		i++;
 	}

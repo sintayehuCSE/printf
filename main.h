@@ -56,7 +56,7 @@ int print_address(va_list, char[], int, int, int, int, int, int, int, int);
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
 int write_char(char c);
 int write_number(int, char[], int);
-int write_unsigned(char[], int, int);
+int write_unsgnd(char[], int, int);
 int write_octal(char[], int, int);
 int write_hexa_lower(char[], int, int);
 int write_hexa_upper(char[], int, int);
@@ -74,7 +74,7 @@ int get_width(const char *fmt, int *index, va_list ap);
 int get_precision(const char *fmt, int *index, va_list ap);
 
 /* ............LIST OF FUNCTION FOR TYPE CASTING NUMBERS..................*/
-long int cast_unsigned(unsigned long int num, int size);
+long int cast_unsgnd(unsigned long int num, int size);
 long int cast_octal(unsigned long int num, int size);
 long int cast_hexa_lower(unsigned int num, int size);
 long int cast_hexa_upper(unsigned int num, int size);

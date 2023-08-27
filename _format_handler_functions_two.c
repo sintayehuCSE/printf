@@ -27,7 +27,7 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(space);
 	UNUSED(width);
 	UNUSED(precision);
-	num = cast_unsigned(num, size);
+	num = cast_unsgnd(num, size);
 	if (num == 0)
 	{
 		array[i] = '0';
@@ -40,7 +40,7 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 		num = num / 10;
 	}
 	i++;
-	return (write_unsigned(array, i, size));
+	return (write_unsgnd(array, i, size));
 }
 /**
  * print_octal - Print numbers in octal number system

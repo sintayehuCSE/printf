@@ -60,7 +60,10 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(space);
 	UNUSED(width);
 	UNUSED(precision);
-	/* if (str == NULL) */
+	if (str == NULL)
+	{
+		return (write(1, "(null)", 6));
+	}
 	while (str[len] != '\0')
 		len++;
 	return (write(1, str, len));
