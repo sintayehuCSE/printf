@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 /**
  * struct print_type - A structure to hold fmt and function specifier.
  * @fmt: Pointer to specified format character
@@ -74,6 +75,7 @@ int get_width(const char *fmt, int *index, va_list ap);
 int get_precision(const char *fmt, int *index, va_list ap);
 
 /* ............LIST OF FUNCTION FOR TYPE CASTING NUMBERS..................*/
+long int cast_number(long int num, int size);
 long int cast_unsgnd(unsigned long int num, int size);
 long int cast_octal(unsigned long int num, int size);
 long int cast_hexa_lower(unsigned int num, int size);

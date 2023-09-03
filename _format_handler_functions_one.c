@@ -121,7 +121,6 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	int is_ngtive = 0;
 	unsigned long int n;
 
-	UNUSED(size);
 	UNUSED(minus);
 	UNUSED(plus);
 	UNUSED(zero);
@@ -129,10 +128,11 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(space);
 	UNUSED(width);
 	UNUSED(precision);
-	n = (unsigned long int)num;
+	num = cast_number(num, size);
 	if (num == 0)
 		array[i--] = '0';
 	array[BUFFER_SIZE - 1] = '\0';
+	n = (unsigned long int)num;
 	if (num < 0)
 	{
 		n = (unsigned long int)((-1) * num);

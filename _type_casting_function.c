@@ -1,5 +1,20 @@
 #include "main.h"
 /**
+ * cast_number - Casts a signed number to the required type
+ * @num: The signed number to be casted
+ * @size: The type of casting specifier
+ *
+ * Return: The number in the form of reequired type
+ */
+long int cast_number(long int num, int size)
+{
+	if (size == LONG_SIZE)
+		return (num);
+	else if (size == SHORT_SIZE)
+		return ((short)num);
+	return ((int)num);
+}
+/**
  * cast_unsgnd - casts a number to the required type
  * @num: The unsigned number to be casted
  * @size: The type of casting specifier
