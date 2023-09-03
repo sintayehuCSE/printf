@@ -181,7 +181,7 @@ int get_space(const char *fmt, int *index)
 	if (fmt[i] == ' ')
 	{
 		del = fmt[*index + 2];
-		if (space && (del != 'd' || del != 'i'))
+		if (space && (del != 'd' && del != 'i'))
 			return (flag);
 	}
 	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)

@@ -1,17 +1,25 @@
 #include "main.h"
 /**
  * write_hexa_upper - printout each digit of uppercase hexadecimal
+ * @num_case: Specify whether a number is zero or not
  * @array: Buffer that will store each upper case hexa digit
  * @index: Index of the first hexa digit
  * @size: Type casting specifier
+ * @hash: Specify the hash flag
  *
  * Return: Number of uppercase hexa digit printed
  */
-int write_hexa_upper(char array[], int index, int size)
+int write_hexa_upper(int num_case, char array[], int index, int size, int hash)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 
 	UNUSED(size);
+	if (hash && !num_case)
+	{
+		array[--index] = 'X';
+		array[--index] = '0';
+		len += 2;
+	}
 	return (write(1, &array[index], len));
 }
 /**

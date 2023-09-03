@@ -122,10 +122,8 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	unsigned long int n;
 
 	UNUSED(minus);
-	UNUSED(plus);
 	UNUSED(zero);
 	UNUSED(hash);
-	UNUSED(space);
 	UNUSED(width);
 	UNUSED(precision);
 	num = cast_number(num, size);
@@ -145,7 +143,7 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 		n = n / 10;
 	}
 	i++;
-	return (write_number(is_ngtive, array, i));
+	return (write_number(is_ngtive, array, i, plus, space));
 }
 /**
  * print_binary - Convert unsigned int argument to binary
