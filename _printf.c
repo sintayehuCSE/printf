@@ -88,6 +88,12 @@ int get_delimiter(const char *fmt, int *index)
 		else if ((del > 32 && del < 48) && (del != '+' && del != '-' &&
 				  del != '#'))
 			break;
+		else if ((fmt[i - 1] == 'l' || fmt[i - 1] == 'h') &&
+			 (del == '\n' || del == '\0'))
+		{
+			i--;
+			break;
+		}
 		i++;
 	}
 	return (i);
