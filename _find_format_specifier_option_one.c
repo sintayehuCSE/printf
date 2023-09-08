@@ -190,9 +190,9 @@ int get_space(const char *fmt, int *index)
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
 		    || del == '\0')
 			break;
-		if (fmt[i] == 35)
+		if (fmt[i] == 32)
 		{
-			flag = 35;
+			flag = 32;
 			break;
 		}
 		i++;
