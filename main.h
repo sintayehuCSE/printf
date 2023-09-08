@@ -78,8 +78,8 @@ int get_precision(const char *fmt, int *index, va_list ap);
 long int cast_number(long int num, int size);
 long int cast_unsgnd(unsigned long int num, int size);
 long int cast_octal(unsigned long int num, int size);
-long int cast_hexa_lower(unsigned int num, int size);
-long int cast_hexa_upper(unsigned int num, int size);
+long int cast_hexa_lower(unsigned long int num, int size);
+long int cast_hexa_upper(unsigned long int num, int size);
 
 /* ..................FUNCTIONS FOR NON-PRINTABLE CHARACTERS...............*/
 int check_printable(char c);
