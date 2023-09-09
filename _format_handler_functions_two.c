@@ -20,12 +20,9 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 	int i = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(ap, unsigned long int);
 
-	UNUSED(minus);
 	UNUSED(plus);
-	UNUSED(zero);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	num = cast_unsgnd(num, size);
 	if (num == 0)
@@ -40,7 +37,7 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 		num = num / 10;
 	}
 	i++;
-	return (write_unsgnd(array, i, size));
+	return (write_unsgnd(array, i, minus, zero, width));
 }
 /**
  * print_octal - Print numbers in octal number system
@@ -63,11 +60,8 @@ int print_octal(va_list ap, char array[], int minus, int plus, int zero,
 	int i = BUFFER_SIZE - 2, num_case = 0;
 	unsigned long int num = va_arg(ap, unsigned long int);
 
-	UNUSED(minus);
 	UNUSED(plus);
-	UNUSED(zero);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	num = cast_octal(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
@@ -84,7 +78,7 @@ int print_octal(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_octal(num_case, array, i, size, hash));
+	return (write_octal(num_case, array, i, minus, zero, hash, width));
 }
 /**
  * print_hexa_lower - print number in lowercase hexadecimal number system
@@ -108,11 +102,8 @@ int print_hexa_lower(va_list ap, char array[], int minus, int plus, int zero,
 	unsigned long int num = va_arg(ap, unsigned long int);
 	char base_digit_lower[] = "0123456789abcdef";
 
-	UNUSED(minus);
 	UNUSED(plus);
-	UNUSED(zero);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	num = cast_hexa_lower(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
@@ -129,7 +120,7 @@ int print_hexa_lower(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_hexa_lower(num_case, array, i, size, hash));
+	return (write_hexa_lower(num_case, array, i, minus, zero, hash, width));
 }
 /**
  * print_hexa_upper - print number in uppercase hexadecimal number system
@@ -153,11 +144,8 @@ int print_hexa_upper(va_list ap, char array[], int minus, int plus, int zero,
 	unsigned long int num = va_arg(ap, unsigned long int);
 	char base_digit_upper[] = "0123456789ABCDEF";
 
-	UNUSED(minus);
 	UNUSED(plus);
-	UNUSED(zero);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	num = cast_hexa_upper(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
@@ -174,7 +162,7 @@ int print_hexa_upper(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_hexa_upper(num_case, array, i, size, hash));
+	return (write_hexa_upper(num_case, array, i, minus, zero, hash, width));
 }
 /**
  * print_non_printable - prints the non printable in argument and its chars

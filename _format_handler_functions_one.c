@@ -18,6 +18,7 @@ int print_char(va_list ap, char array[], int minus, int plus, int zero,
 	       int hash, int space, int size, int width, int precision)
 {
 	char c = va_arg(ap, int);
+	int i = BUFFER_SIZE - 2;
 
 	UNUSED(size);
 	UNUSED(minus);
@@ -25,10 +26,10 @@ int print_char(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(zero);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(array);
-	return (write_char(c));
+	array[BUFFER_SIZE - 1] = '\0';
+	array[i] = c;
+	return (write_char(array, i, width));
 }
 /**
  * print_string - Print the argument in string form
@@ -49,16 +50,16 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 		 int hash, int space, int size, int width, int precision)
 {
 	int len = 0;
+	int i = 0;
+	char padd = ' ';
 	char *str = va_arg(ap, char *);
 
-	UNUSED(array);
 	UNUSED(size);
 	UNUSED(minus);
 	UNUSED(plus);
 	UNUSED(zero);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	if (str == NULL)
 	{
@@ -66,6 +67,12 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	}
 	while (str[len] != '\0')
 		len++;
+	if (width && (width > len))
+	{
+		for (; i < width - len; i++)
+			array[i] = padd;
+		return (write(1, &array[0], width - len) + write(1, str, len));
+	}
 	return (write(1, str, len));
 }
 /**
@@ -121,10 +128,7 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	int is_ngtive = 0;
 	unsigned long int n;
 
-	UNUSED(minus);
-	UNUSED(zero);
 	UNUSED(hash);
-	UNUSED(width);
 	UNUSED(precision);
 	num = cast_number(num, size);
 	if (num == 0)
@@ -143,7 +147,8 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 		n = n / 10;
 	}
 	i++;
-	return (write_number(is_ngtive, array, i, plus, space));
+	return (write_number(is_ngtive, array, i, minus, plus, zero, space,
+			     width));
 }
 /**
  * print_binary - Convert unsigned int argument to binary
