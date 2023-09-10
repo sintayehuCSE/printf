@@ -116,7 +116,7 @@ int get_precision(const char *fmt, int *index, va_list ap)
 		if (del >= 48 && del <= 57)
 		{
 			precision *= 10;
-			precision += del + '0';
+			precision += del - '0';
 		}
 		i++;
 	}
