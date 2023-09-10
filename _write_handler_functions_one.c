@@ -24,9 +24,9 @@ int write_char(char array[], int index, int width)
 /**
  * write_number - Write each digit in number to std output
  * @is_ngtive: Check if the number is negative
- * @array: Pointer to the array that will hold the number's
+ * @a: Pointer to the array that will hold the number's
  * digit as characters
- * @ind: Index to the first element of array pointer
+ * @id: Index to the first element of array pointer
  * @minus: Specify the minus flag
  * @plus: Specify the plus flag
  * @zero: Specify the zero flag
@@ -36,48 +36,46 @@ int write_char(char array[], int index, int width)
  *
  * Return: Number of digits and signs printed
  */
-int write_number(int is_ngtive, char array[], int ind, int minus, int plus,
+int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		 int zero, int space, int width, int precision)
 {
 	int i = 0, j = 0, len;
 	char padd = ' ';
 
+	if (!precision)
+		return (0);
 	if (is_ngtive)
-		array[--ind] = '-';
+		a[--id] = '-';
 	else if (space && !plus)
-		array[--ind] = ' ';
+		a[--id] = ' ';
 	else if ((space && plus) || plus)
-		array[--ind] = '+';
-	len = (BUFFER_SIZE - ind) - 1;
+		a[--id] = '+';
+	len = (BUFFER_SIZE - id) - 1;
 	if ((zero && !minus) || precision > width)
-		padd = '0';
-	if (precision > width)
-		width = precision;
+		padd = '0', width = precision;
 	if (width > len)
 	{
 		for (; j < (width - len); j++)
-			array[j] = padd;
+			a[j] = padd;
 		if (minus)
-			return (write(1, &array[ind], len) + write(1, &array[0], width - len));
+			return (write(1, &a[id], len) + write(1, &a[0], width - len));
 		else if (padd)
 		{
-			if ((padd == '0' && is_ngtive) || (padd == '0' && precision))
+			if ((padd == '0' && is_ngtive) || (padd == '0' && precision > width))
 			{
 				if (is_ngtive || space)
 				{
-					_putchar(array[ind]), i++, ind++;
-					i = i + write(1, &array[0], width - len) + write(1, &array[ind], len - 1);
-					return (i);
+					_putchar(a[id]), i++, id++;
+					if (precision)
+						_putchar('0'), i++;
+					return (i + write(1, &a[0], width - len) + write(1, &a[id], len - 1));
 				}
-				return (write(1, &array[0], width - len)
-					+ write(1, &array[ind], len));
+				return (write(1, &a[0], width - len) + write(1, &a[id], len));
 			}
-			return (write(1, &array[0], width - len) + write(1, &array[ind], len));
+			return (write(1, &a[0], width - len) + write(1, &a[id], len));
 		}
 	}
-	while (*(array + ind))
-		_putchar(*(array + ind)), i++, ind++;
-	return (i);
+	return (write(1, &a[id], len));
 }
 /**
  * write_unsgnd - Prints each digit within unsigned numbers
@@ -97,6 +95,8 @@ int write_unsgnd(char array[], int index, int minus, int zero, int width,
 	char padd = ' ';
 	int i = 0;
 
+	if (!precision)
+		return (0);
 	if ((zero && !minus) || (precision > width))
 		padd = '0';
 	if (width < precision)
@@ -132,6 +132,8 @@ int write_octal(int num_case, char array[], int index, int minus, int zero,
 	char padd = ' ';
 	int i = 0;
 
+	if (!precision)
+		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = '0';
@@ -172,6 +174,8 @@ int write_hexa_lower(int num_case, char array[], int index, int minus,
 	char padd =  ' ';
 	int i = 0;
 
+	if (!precision)
+		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = 'x';

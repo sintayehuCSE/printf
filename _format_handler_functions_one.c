@@ -64,10 +64,12 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	{
 		return (write(1, "(null)", 6));
 	}
+	if (!precision)
+		return (0);
 	while (str[len] != '\0')
 		len++;
-	if (precision && precision < len)
-		return (write(1, str, precision));
+	if (precision != -1 && precision < len)
+		return (write(1, str, precision) + _putchar(10));
 	if (width && (width > len))
 	{
 		for (; i < width - len; i++)

@@ -19,6 +19,8 @@ int write_hexa_upper(int num_case, char array[], int index, int minus, int zero
 	char padd = ' ';
 	int i = 0;
 
+	if (!precision)
+		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = 'X';
