@@ -23,7 +23,6 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(plus);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(precision);
 	num = cast_unsgnd(num, size);
 	if (num == 0)
 	{
@@ -37,7 +36,7 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 		num = num / 10;
 	}
 	i++;
-	return (write_unsgnd(array, i, minus, zero, width));
+	return (write_unsgnd(array, i, minus, zero, width, precision));
 }
 /**
  * print_octal - Print numbers in octal number system
@@ -62,7 +61,6 @@ int print_octal(va_list ap, char array[], int minus, int plus, int zero,
 
 	UNUSED(plus);
 	UNUSED(space);
-	UNUSED(precision);
 	num = cast_octal(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
@@ -78,7 +76,7 @@ int print_octal(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_octal(num_case, array, i, minus, zero, hash, width));
+	return (write_octal(num_case, array, i, minus, zero, hash, width, precision));
 }
 /**
  * print_hexa_lower - print number in lowercase hexadecimal number system
@@ -104,7 +102,6 @@ int print_hexa_lower(va_list ap, char array[], int minus, int plus, int zero,
 
 	UNUSED(plus);
 	UNUSED(space);
-	UNUSED(precision);
 	num = cast_hexa_lower(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
@@ -120,7 +117,8 @@ int print_hexa_lower(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_hexa_lower(num_case, array, i, minus, zero, hash, width));
+	return (write_hexa_lower(num_case, array, i, minus, zero, hash, width,
+				 precision));
 }
 /**
  * print_hexa_upper - print number in uppercase hexadecimal number system
@@ -146,7 +144,6 @@ int print_hexa_upper(va_list ap, char array[], int minus, int plus, int zero,
 
 	UNUSED(plus);
 	UNUSED(space);
-	UNUSED(precision);
 	num = cast_hexa_upper(num, size);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
@@ -162,7 +159,8 @@ int print_hexa_upper(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_hexa_upper(num_case, array, i, minus, zero, hash, width));
+	return (write_hexa_upper(num_case, array, i, minus, zero, hash, width,
+				 precision));
 }
 /**
  * print_non_printable - prints the non printable in argument and its chars

@@ -60,13 +60,14 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(zero);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(precision);
 	if (str == NULL)
 	{
 		return (write(1, "(null)", 6));
 	}
 	while (str[len] != '\0')
 		len++;
+	if (precision && precision < len)
+		return (write(1, str, precision));
 	if (width && (width > len))
 	{
 		for (; i < width - len; i++)
@@ -129,7 +130,6 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	unsigned long int n;
 
 	UNUSED(hash);
-	UNUSED(precision);
 	num = cast_number(num, size);
 	if (num == 0)
 		array[i--] = '0';
@@ -148,7 +148,7 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	}
 	i++;
 	return (write_number(is_ngtive, array, i, minus, plus, zero, space,
-			     width));
+			     width, precision));
 }
 /**
  * print_binary - Convert unsigned int argument to binary

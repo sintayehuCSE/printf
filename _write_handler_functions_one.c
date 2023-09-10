@@ -32,15 +32,15 @@ int write_char(char array[], int index, int width)
  * @zero: Specify the zero flag
  * @space: Specify the space flag
  * @width: Specify the field width option
+ * @precision: Specify the precision oprion
  *
  * Return: Number of digits and signs printed
  */
 int write_number(int is_ngtive, char array[], int ind, int minus, int plus,
-		 int zero, int space, int width)
+		 int zero, int space, int width, int precision)
 {
-	int i = 0, j = 0;
+	int i = 0, j = 0, len;
 	char padd = ' ';
-	int len;
 
 	if (is_ngtive)
 		array[--ind] = '-';
@@ -49,33 +49,34 @@ int write_number(int is_ngtive, char array[], int ind, int minus, int plus,
 	else if ((space && plus) || plus)
 		array[--ind] = '+';
 	len = (BUFFER_SIZE - ind) - 1;
+	if ((zero && !minus) || precision > width)
+		padd = '0';
+	if (precision > width)
+		width = precision;
 	if (width > len)
 	{
-		if (zero && !minus)
-			padd = '0';
 		for (; j < (width - len); j++)
 			array[j] = padd;
 		if (minus)
 			return (write(1, &array[ind], len) + write(1, &array[0], width - len));
 		else if (padd)
 		{
-			if (padd == '0' && is_ngtive)
+			if ((padd == '0' && is_ngtive) || (padd == '0' && precision))
 			{
-				_putchar(array[ind]);
-				i++;
-				ind++;
-				return (i + write(1, &array[0], width - len)
-					+ write(1, &array[ind], len - 1));
+				if (is_ngtive || space)
+				{
+					_putchar(array[ind]), i++, ind++;
+					i = i + write(1, &array[0], width - len) + write(1, &array[ind], len - 1);
+					return (i);
+				}
+				return (write(1, &array[0], width - len)
+					+ write(1, &array[ind], len));
 			}
 			return (write(1, &array[0], width - len) + write(1, &array[ind], len));
 		}
 	}
 	while (*(array + ind))
-	{
-		_putchar(*(array + ind));
-		i++;
-		ind++;
-	}
+		_putchar(*(array + ind)), i++, ind++;
 	return (i);
 }
 /**
@@ -85,17 +86,21 @@ int write_number(int is_ngtive, char array[], int ind, int minus, int plus,
  * @minus: Specify the minus flag
  * @zero: Specify the zero flag
  * @width: Specify the field width option
+ * @precision: Specify the precision option
  *
  * Return: The number of digit and fillables printed
  */
-int write_unsgnd(char array[], int index, int minus, int zero, int width)
+int write_unsgnd(char array[], int index, int minus, int zero, int width,
+		 int precision)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 	char padd = ' ';
 	int i = 0;
 
-	if (zero && !minus)
+	if ((zero && !minus) || (precision > width))
 		padd = '0';
+	if (width < precision)
+		width = precision;
 	if (width > len)
 	{
 		for (; i < width - len; i++)
@@ -116,11 +121,12 @@ int write_unsgnd(char array[], int index, int minus, int zero, int width)
  * @zero: Specify the zero flag
  * @hash: Specify the hash flag
  * @width: Specify the field width option
+ * @precision: Specify the precision option
  *
  * Return: The number of base digit printed
  */
 int write_octal(int num_case, char array[], int index, int minus, int zero,
-		int hash, int width)
+		int hash, int width, int precision)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 	char padd = ' ';
@@ -131,8 +137,10 @@ int write_octal(int num_case, char array[], int index, int minus, int zero,
 		array[--index] = '0';
 		len++;
 	}
-	if (zero && !minus)
+	if ((zero && !minus) || (precision > width))
 		padd = '0';
+	if (width < precision)
+		width = precision;
 	if (width > len)
 	{
 		for (; i < width - len; i++)
@@ -153,11 +161,12 @@ int write_octal(int num_case, char array[], int index, int minus, int zero,
  * @zero: Specify the zero flag
  * @hash: Specify the hash flag
  * @width: Specify the field width option
+ * @precision: Specify the precision option
  *
  * Return: Number of lowercase hexa digit printed
  */
 int write_hexa_lower(int num_case, char array[], int index, int minus,
-		     int zero, int hash, int width)
+		     int zero, int hash, int width, int precision)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 	char padd =  ' ';
@@ -169,8 +178,10 @@ int write_hexa_lower(int num_case, char array[], int index, int minus,
 		array[--index] = '0';
 		len += 2;
 	}
-	if (zero && !minus)
+	if ((zero && !minus) || (precision > width))
 		padd = '0';
+	if (precision > width)
+		width = precision;
 	if (width > len)
 	{
 		for (; i < width - len; i++)

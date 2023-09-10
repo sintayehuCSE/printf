@@ -56,11 +56,11 @@ int print_address(va_list, char[], int, int, int, int, int, int, int, int);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
 int write_char(char[], int, int);
-int write_number(int, char[], int, int, int, int, int, int);
-int write_unsgnd(char[], int, int, int, int);
-int write_octal(int, char[], int, int, int, int, int);
-int write_hexa_lower(int, char[], int, int, int, int, int);
-int write_hexa_upper(int, char[], int, int, int, int, int);
+int write_number(int, char[], int, int, int, int, int, int, int);
+int write_unsgnd(char[], int, int, int, int, int);
+int write_octal(int, char[], int, int, int, int, int, int);
+int write_hexa_lower(int, char[], int, int, int, int, int, int);
+int write_hexa_upper(int, char[], int, int, int, int, int, int);
 int write_non_printable(char[]);
 int write_address(char[], int);
 

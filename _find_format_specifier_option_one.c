@@ -28,7 +28,7 @@ int get_minus(const char *fmt, int *index)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
-		    || del == '\0')
+		    || del == '\0' || del == '.')
 			break;
 		if (fmt[i] == 45)
 		{
@@ -68,7 +68,7 @@ int get_plus(const char *fmt, int *index)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
-		    || del == '\0')
+		    || del == '\0' || del == '.')
 			break;
 		if (fmt[i] == 43)
 		{
@@ -108,7 +108,7 @@ int get_zero(const char *fmt, int *index)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
-		    || del == '\0')
+		    || del == '\0' || del == '.')
 			break;
 		if (fmt[i] == 48)
 		{
@@ -148,7 +148,7 @@ int get_hash(const char *fmt, int *index)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
-		    || del == '\0')
+		    || del == '\0' || del == '.')
 			break;
 		if (fmt[i] == 35)
 		{
@@ -188,7 +188,7 @@ int get_space(const char *fmt, int *index)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
-		    || del == '\0')
+		    || del == '\0' || del == '.')
 			break;
 		if (fmt[i] == 32)
 		{
