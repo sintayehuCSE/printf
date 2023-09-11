@@ -37,6 +37,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		{'S', print_non_printable},
 		{'p', print_address},
 		{'r', print_reverse},
+		{'R', print_rot13},
 		{'\0', NULL}
 	};
 

@@ -88,3 +88,16 @@ int write_reverse(char array[], int ind)
 
 	return (write(1, &array[ind], len));
 }
+/**
+ * write_rot13 - Printout the rot13'd string
+ * @array: A buffer that store the rot13'd string
+ * @ind: The index at which first element of the string is located
+ *
+ * Return: The number of characters printed
+ */
+int write_rot13(char array[], int ind)
+{
+	int len = (BUFFER_SIZE - ind) - 1;
+
+	return (write(1, &array[ind], len));
+}

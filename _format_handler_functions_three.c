@@ -88,3 +88,56 @@ int print_reverse(va_list ap, char array[], int minus, int plus, int zero,
 	i++;
 	return (write_reverse(array, i));
 }
+/**
+ * print_rot13 - Format a string to be printed with rot13 algorithm
+ * @ap: Pointer to the variable argument
+ * @array: The buffer to store rot13'd string character
+ * @minus: Specify the minus flag
+ * @plus: Specify the plus flag
+ * @zero: Specify the zero flag
+ * @hash: Specify the hash flag
+ * @space: Specify the space flag
+ * @size: Specify the type casting flag
+ * @width: Specify the field width option
+ * @precision: Specify the field precision option
+ *
+ * Return: The number of characters printed
+ */
+int print_rot13(va_list ap, char array[], int minus, int plus, int zero,
+		int hash, int space, int size, int width, int precision)
+{
+	int ind = BUFFER_SIZE - 2;
+	int len = 0, i, status = 0;
+	char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char *rot_13 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	char *str = va_arg(ap, char *);
+
+	UNUSED(minus);
+	UNUSED(plus);
+	UNUSED(zero);
+	UNUSED(hash);
+	UNUSED(space);
+	UNUSED(size);
+	UNUSED(width);
+	UNUSED(precision);
+	if (!str)
+		return (write(1, "(null)", 6));
+	while (str && str[len])
+		len++;
+	array[BUFFER_SIZE - 1] = '\0';
+	for (len = len - 1; len >= 0; len--)
+	{
+		for (i = 0; i < 52; i++)
+		{
+			if (str[len] == alphabet[i])
+			{
+				array[ind--] = rot_13[i];
+				status = 1;
+			}
+		}
+		if (!status)
+			array[ind--] = str[len];
+	}
+	ind++;
+	return (write_rot13(array, ind));
+}
