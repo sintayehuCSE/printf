@@ -45,3 +45,46 @@ int print_address(va_list ap, char array[], int minus, int plus, int zero,
 	return (write_address(array, i));
 
 }
+/**
+ * print_reverse - Format string to printed in reverse
+ * @ap: Pointer to variable arguments
+ * @array: A buffer to store the digit of the argument
+ * @minus: Specify the minus flag character
+ * @plus: Specify the plus flag character
+ * @zero: Specify the zero flag character
+ * @hash: Specify the hash flag character
+ * @space: Specify the invisible plus sign flag character
+ * @size: Specify the type casting mode
+ * @width: Specify the field width option
+ * @precision: Specify the field precision option
+ *
+ * Return: The number of character printed
+ */
+int print_reverse(va_list ap, char array[], int minus, int plus, int zero,
+		  int hash, int space, int size, int width, int precision)
+{
+	int i = BUFFER_SIZE - 2;
+	int len = 0, j = 0;
+	char *str = va_arg(ap, char *);
+
+	UNUSED(minus);
+	UNUSED(plus);
+	UNUSED(zero);
+	UNUSED(hash);
+	UNUSED(space);
+	UNUSED(size);
+	UNUSED(width);
+	UNUSED(precision);
+	if (!str)
+		return (write(1, "(null)", 6));
+	while (str && str[len])
+		len++;
+	array[BUFFER_SIZE - 1] = '\0';
+	for (len = len - 1; len >= 0; len--)
+	{
+		array[i--] = str[j];
+		j++;
+	}
+	i++;
+	return (write_reverse(array, i));
+}

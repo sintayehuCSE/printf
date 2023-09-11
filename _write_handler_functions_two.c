@@ -75,3 +75,16 @@ int write_address(char array[], int index)
 	array[--index] = '0';
 	return (write(1, &array[index], len));
 }
+/**
+ * write_reverse - Printout the reverse of a string
+ * @array: A buffer that store reversed string
+ * @ind: The index of the first element of the reversed string
+ *
+ * Return: The number of characters printed
+ */
+int write_reverse(char array[], int ind)
+{
+	int len = (BUFFER_SIZE - ind) - 1;
+
+	return (write(1, &array[ind], len));
+}

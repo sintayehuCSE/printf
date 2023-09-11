@@ -53,6 +53,7 @@ int print_hexa_upper(va_list, char[], int, int, int, int, int, int, int, int);
 int print_non_printable(va_list, char[], int, int, int, int, int, int, int,
 			int);
 int print_address(va_list, char[], int, int, int, int, int, int, int, int);
+int print_reverse(va_list, char[], int, int, int, int, int, int, int, int);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
 int write_char(char[], int, int);
@@ -63,6 +64,7 @@ int write_hexa_lower(int, char[], int, int, int, int, int, int);
 int write_hexa_upper(int, char[], int, int, int, int, int, int);
 int write_non_printable(char[]);
 int write_address(char[], int);
+int write_reverse(char[], int);
 
 /* .............LIST OF FUNCTIONS TO DETERMINE SPECIFIERS OPTIONS........... */
 int get_size(const char *format, int *index);
