@@ -90,8 +90,8 @@ int write_reverse(char array[], int ind)
 }
 /**
  * write_rot13 - Printout the rot13'd string
- * @array: A buffer that store the rot13'd string
- * @ind: The index at which first element of the string is located
+ * @array: A buffer to store the rot13'd string
+ * @ind: Index to the first element of rot13'd string
  *
  * Return: The number of characters printed
  */

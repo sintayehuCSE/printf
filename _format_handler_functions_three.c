@@ -106,8 +106,8 @@ int print_reverse(va_list ap, char array[], int minus, int plus, int zero,
 int print_rot13(va_list ap, char array[], int minus, int plus, int zero,
 		int hash, int space, int size, int width, int precision)
 {
+	int len = 0, i, status;
 	int ind = BUFFER_SIZE - 2;
-	int len = 0, i, status = 0;
 	char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	char *rot_13 = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 	char *str = va_arg(ap, char *);
@@ -127,12 +127,14 @@ int print_rot13(va_list ap, char array[], int minus, int plus, int zero,
 	array[BUFFER_SIZE - 1] = '\0';
 	for (len = len - 1; len >= 0; len--)
 	{
+		status = 0;
 		for (i = 0; i < 52; i++)
 		{
 			if (str[len] == alphabet[i])
 			{
 				array[ind--] = rot_13[i];
 				status = 1;
+				break;
 			}
 		}
 		if (!status)
