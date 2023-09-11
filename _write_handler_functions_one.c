@@ -39,7 +39,7 @@ int write_char(char array[], int index, int width)
 int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		 int zero, int space, int width, int precision)
 {
-	int i = 0, j = 0, len;
+	int i = 0, j = 0, len, assgnd = 0;
 	char padd = ' ';
 
 	if (!precision)
@@ -52,7 +52,7 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		a[--id] = '+';
 	len = (BUFFER_SIZE - id) - 1;
 	if ((zero && !minus) || precision > width)
-		padd = '0', width = precision;
+		padd = '0', width = precision, assgnd = 1;
 	if (width > len)
 	{
 		for (; j < (width - len); j++)
@@ -61,7 +61,7 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 			return (write(1, &a[id], len) + write(1, &a[0], width - len));
 		else if (padd)
 		{
-			if ((padd == '0' && is_ngtive) || (padd == '0' && precision > width))
+			if ((padd == '0' && is_ngtive) || (padd == '0' && assgnd))
 			{
 				if (is_ngtive || space)
 				{

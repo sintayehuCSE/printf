@@ -84,7 +84,7 @@ int get_width(const char *fmt, int *index, va_list ap)
 int get_precision(const char *fmt, int *index, va_list ap)
 {
 	int i = *index, precision = -1;
-	char del, chr;
+	char del;
 
 	if (fmt[i] == 'l' || fmt[i] == 'h' || fmt[i] == '%')
 		i++;
@@ -96,8 +96,7 @@ int get_precision(const char *fmt, int *index, va_list ap)
 		if (fmt[i] == '.')
 			break;
 		i++;
-	}
-	i++;
+	} i++;
 	if (fmt[i] == '*' && fmt[i - 1] != '\0')
 	{
 		precision = va_arg(ap, int);
@@ -106,18 +105,20 @@ int get_precision(const char *fmt, int *index, va_list ap)
 	while (fmt[i] != '\0' && fmt[i - 1] != '\0')
 	{
 		del = fmt[i];
-		chr = fmt[i + 1];
+		if ((fmt[i - 1] == '.') && ((del > 64 && del < 91) ||
+					    (del > 96 && del < 123)))
+		{
+			precision = 0;
+			break;
+		}
 		if ((del > 64 && del < 91) || (del > 96 && del < 123) || del == '-')
 			break;
 		if (del >= 48 && del <= 57)
 		{
+			if (precision == -1)
+				precision = 0;
 			precision *= 10;
 			precision += del - '0';
-		}
-		if ((del == '.') && ((chr > 64 && chr < 91) || (chr > 96 && chr < 123)))
-		{
-			precision = 0;
-			break;
 		}
 		i++;
 	}
