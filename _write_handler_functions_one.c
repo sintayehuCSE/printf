@@ -3,11 +3,12 @@
  * write_char - Prints a char string
  * @array: The buffer that store the character to be stored
  * @index: The index at which the character is stored
+ * @minus: Specify the minus flag
  * @width: Specify the field width option
  *
  * Return: Number of characters printed
  */
-int write_char(char array[], int index, int width)
+int write_char(char array[], int index, int minus, int width)
 {
 	int len = (BUFFER_SIZE - index) - 1;
 	char padd = ' ';
@@ -17,6 +18,8 @@ int write_char(char array[], int index, int width)
 	{
 		for (; i < width - len; i++)
 			array[i] = padd;
+		if (minus)
+			return (write(1, &array[index], len) + write(1, &array[0], width - len));
 		return (write(1, &array[0], width - len) + write(1, &array[index], len));
 	}
 	return (write(1, &array[index], len));

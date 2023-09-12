@@ -92,7 +92,7 @@ int get_precision(const char *fmt, int *index, va_list ap)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123))
-			break;
+			return (precision);
 		if (fmt[i] == '.')
 			break;
 		i++;

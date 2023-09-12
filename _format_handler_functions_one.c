@@ -21,7 +21,6 @@ int print_char(va_list ap, char array[], int minus, int plus, int zero,
 	int i = BUFFER_SIZE - 2;
 
 	UNUSED(size);
-	UNUSED(minus);
 	UNUSED(plus);
 	UNUSED(zero);
 	UNUSED(hash);
@@ -29,7 +28,7 @@ int print_char(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(precision);
 	array[BUFFER_SIZE - 1] = '\0';
 	array[i] = c;
-	return (write_char(array, i, width));
+	return (write_char(array, i, minus, width));
 }
 /**
  * print_string - Print the argument in string form
@@ -55,7 +54,6 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	char *str = va_arg(ap, char *);
 
 	UNUSED(size);
-	UNUSED(minus);
 	UNUSED(plus);
 	UNUSED(zero);
 	UNUSED(hash);
@@ -74,6 +72,8 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	{
 		for (; i < width - len; i++)
 			array[i] = padd;
+		if (minus)
+			return (write(1, str, len) + write(1, &array[0], width - len))
 		return (write(1, &array[0], width - len) + write(1, str, len));
 	}
 	return (write(1, str, len));

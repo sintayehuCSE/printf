@@ -57,7 +57,7 @@ int print_reverse(va_list, char[], int, int, int, int, int, int, int, int);
 int print_rot13(va_list, char[], int, int, int, int, int, int, int, int);
 
 /* .............LIST OF FUNCTION TO HANDLE WRITE TO STD OUTPUT........*/
-int write_char(char[], int, int);
+int write_char(char[], int, int, int);
 int write_number(int, char[], int, int, int, int, int, int, int);
 int write_unsgnd(char[], int, int, int, int, int);
 int write_octal(int, char[], int, int, int, int, int, int);
