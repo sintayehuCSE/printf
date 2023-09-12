@@ -73,7 +73,7 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 		for (; i < width - len; i++)
 			array[i] = padd;
 		if (minus)
-			return (write(1, str, len) + write(1, &array[0], width - len))
+			return (write(1, str, len) + write(1, &array[0], width - len));
 		return (write(1, &array[0], width - len) + write(1, str, len));
 	}
 	return (write(1, str, len));
