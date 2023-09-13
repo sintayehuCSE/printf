@@ -52,24 +52,25 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 	else if ((space && plus) || plus)
 		a[--id] = '+';
 	len = (BUFFER_SIZE - id) - 1;
-	if ((zero && !minus) || precision > width)
+	if ((zero && !minus) || precision >= width)
 		padd = '0';
-	if (precision > width)
+	if (precision >= width)
 		width = precision, assgnd = 1;
-	if (width > len)
+	if (width > len || assgnd)
 	{
 		for (; j < (width - len); j++)
 			a[j] = padd;
-		if (minus)
+		if (minus && precision == -1)
 			return (write(1, &a[id], len) + write(1, &a[0], width - len));
 		else if (padd)
 		{
-			if ((padd == '0' && is_ngtive) || (padd == '0' && assgnd))
+			if ((padd == '0' && is_ngtive) || (padd == '0' && assgnd) || (zero && plus)
+			    || (zero && space))
 			{
 				if (is_ngtive || space || plus)
 				{
 					_putchar(a[id]), i++, id++;
-					if (precision)
+					if (precision != -1)
 						_putchar('0'), i++;
 					return (i + write(1, &a[0], width - len) + write(1, &a[id], len - 1));
 				}
