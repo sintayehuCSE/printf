@@ -56,7 +56,7 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		padd = '0';
 	if (precision >= width)
 		width = precision, assgnd = 1;
-	if (width > len || assgnd)
+	if ((width > len) || (assgnd && precision >= len))
 	{
 		for (; j < (width - len); j++)
 			a[j] = padd;
