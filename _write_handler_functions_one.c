@@ -66,7 +66,7 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		{
 			if ((padd == '0' && is_ngtive) || (padd == '0' && assgnd))
 			{
-				if (is_ngtive || space)
+				if (is_ngtive || space || plus)
 				{
 					_putchar(a[id]), i++, id++;
 					if (precision)
