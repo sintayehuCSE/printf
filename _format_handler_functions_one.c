@@ -133,6 +133,8 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 
 	UNUSED(hash);
 	num = cast_number(num, size);
+	if (!precision && num == 0)
+		return (0);
 	if (num == 0)
 		array[i--] = '0';
 	array[BUFFER_SIZE - 1] = '\0';

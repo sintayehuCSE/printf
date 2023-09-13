@@ -22,12 +22,10 @@ int print_address(va_list ap, char array[], int minus, int plus, int zero,
 	void *address = va_arg(ap, void *);
 	char base_16[] = "0123456789abcdef";
 
-	UNUSED(minus);
 	UNUSED(plus);
 	UNUSED(zero);
 	UNUSED(hash);
 	UNUSED(space);
-	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
 	if (address == NULL)
@@ -42,7 +40,7 @@ int print_address(va_list ap, char array[], int minus, int plus, int zero,
 		if (num == 0)
 			i++;
 	}
-	return (write_address(array, i));
+	return (write_address(array, i, minus, width));
 
 }
 /**

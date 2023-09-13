@@ -56,3 +56,36 @@ void add_hexa_code(char array[], int *index, char c)
 			*index += 1;
 	}
 }
+/**
+ * check_space - Check for space flag or invalid format
+ * @fmt: Pointer to the formating string
+ * @ind: Index at which to check for space or invalide format
+ *
+ * Return: 0 or 32
+ */
+int check_space(const char *fmt, int ind)
+{
+	int i = ind, space = 0, j = 0;
+	char del;
+	char chk[] = {'-', '+', '0', '#', 'l', 'h', 'd', 'i', '.', '*'};
+
+	while (fmt[i + 1] != '\0' && fmt[i + 1] != '\n')
+	{
+		del = fmt[i + 1];
+		for (; j < 10; j++)
+		{
+			if (del == chk[j])
+			{
+				space = 32;
+				break;
+			}
+			else if (del > 47 && del < 58)
+			{
+				space = 32;
+				break;
+			}
+		}
+		break;
+	}
+	return (space);
+}

@@ -64,12 +64,12 @@ int write_octal(int, char[], int, int, int, int, int, int);
 int write_hexa_lower(int, char[], int, int, int, int, int, int);
 int write_hexa_upper(int, char[], int, int, int, int, int, int);
 int write_non_printable(char[]);
-int write_address(char[], int);
+int write_address(char[], int, int, int);
 int write_reverse(char[], int);
 int write_rot13(char[], int);
 
 /* .............LIST OF FUNCTIONS TO DETERMINE SPECIFIERS OPTIONS........... */
-int get_size(const char *format, int *index);
+int get_size(const char *fmt, int *index);
 int get_minus(const char *fmt, int *index);
 int get_plus(const char *fmt, int *index);
 int get_zero(const char *fmt, int *index);
@@ -85,9 +85,10 @@ long int cast_octal(unsigned long int num, int size);
 long int cast_hexa_lower(unsigned long int num, int size);
 long int cast_hexa_upper(unsigned long int num, int size);
 
-/* ..................FUNCTIONS FOR NON-PRINTABLE CHARACTERS...............*/
+/* ..................FUNCTIONS FOR SPECIAL TOOLS..........................*/
 int check_printable(char c);
 void add_hexa_code(char array[], int *index, char c);
+int check_space(const char *fmt, int ind);
 
 
 #endif /* MAIN_H */

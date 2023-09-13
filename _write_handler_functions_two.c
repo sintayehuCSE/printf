@@ -19,8 +19,6 @@ int write_hexa_upper(int num_case, char array[], int index, int minus, int zero
 	char padd = ' ';
 	int i = 0;
 
-	if (!precision)
-		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = 'X';
@@ -64,15 +62,27 @@ int write_non_printable(char array[])
  * write_address - Printout the memory address of a variable
  * @array: A buffer to store each hexa digit of the address
  * @index: The index to the first hexa digit
+ * @minus: Specify the minus flag
+ * @width: Specify the field width option
  *
  * Return: Number of character printed
  */
-int write_address(char array[], int index)
+int write_address(char array[], int index, int minus, int width)
 {
 	int len = (BUFFER_SIZE - index - 1) + 2;
+	char padd = ' ';
+	int i = 0;
 
 	array[--index] = 'x';
 	array[--index] = '0';
+	if (width > len)
+	{
+		for (; i < width - len; i++)
+			array[i] = padd;
+		if (minus)
+			return (write(1, &array[index], len) + write(1, array, width - len));
+		return (write(1, array, width - len) + write(1, &array[index], len));
+	}
 	return (write(1, &array[index], len));
 }
 /**

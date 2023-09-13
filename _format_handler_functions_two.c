@@ -24,6 +24,8 @@ int print_unsigned(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(hash);
 	UNUSED(space);
 	num = cast_unsgnd(num, size);
+	if (!precision && num == 0)
+		return (0);
 	if (num == 0)
 	{
 		array[i] = '0';
@@ -62,6 +64,8 @@ int print_octal(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(plus);
 	UNUSED(space);
 	num = cast_octal(num, size);
+	if (!precision && num == 0)
+		return (0);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
 	{
@@ -103,6 +107,8 @@ int print_hexa_lower(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(plus);
 	UNUSED(space);
 	num = cast_hexa_lower(num, size);
+	if (!precision && num == 0)
+		return (0);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
 	{
@@ -145,6 +151,8 @@ int print_hexa_upper(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(plus);
 	UNUSED(space);
 	num = cast_hexa_upper(num, size);
+	if (!precision && num == 0)
+		return (0);
 	array[BUFFER_SIZE - 1] = '\0';
 	if (num == 0)
 	{

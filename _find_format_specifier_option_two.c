@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * get_size - Calculate a size to cast number argument
- * @format: The pointer to string containing format specifier which come all
+ * @fmt: The pointer to string containing format specifier which come all
  * the way from call to _printf() function
  * @index: The pointer to the index at which _printf() finds the presence of
  * format specifier which is % symbol
@@ -9,17 +9,32 @@
  * Return: 1 or 2 or 0, which are a precision to perform type casting
  */
 
-int get_size(const char *format, int *index)
+int get_size(const char *fmt, int *index)
 {
 	int size = 0;
 	int nxt_indx = *index + 1;
+	int i = nxt_indx;
 
-	if (format[nxt_indx] == 'l')
+	if (fmt[nxt_indx] == 'l')
 		size = LONG_SIZE;
-	else if (format[nxt_indx] == 'h')
+	else if (fmt[nxt_indx] == 'h')
 		size = SHORT_SIZE;
 	if (size != 0)
 		*index = nxt_indx;
+	if (size == 0)
+	{
+		while (fmt[i] != '\0')
+		{
+			if (((fmt[i] > 64 && fmt[i] < 91) || (fmt[i] > 96 && fmt[i] < 123)) &&
+			    (fmt[i] != 'l' && fmt[i] != 'h'))
+				break;
+			if (fmt[i] == 'l')
+				size = LONG_SIZE;
+			else if (fmt[i] == 'h')
+				size = SHORT_SIZE;
+			i++;
+		}
+	}
 	return (size);
 }
 /**

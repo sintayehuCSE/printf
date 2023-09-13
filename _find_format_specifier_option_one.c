@@ -9,13 +9,16 @@
 int get_minus(const char *fmt, int *index)
 {
 	int nxt_indx = *index + 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', ' '}, del;
+	char flag_in_chr[] = {'-', '+', '0', '#'}, del;
 	int flag = 0, i = nxt_indx, space = 1;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if ((fmt[*index + 2] == flag_in_chr[i]) && fmt[i] != '\0')
+		{
 			space = 0;
+			break;
+		}
 	}
 	i = nxt_indx;
 	if (fmt[i] == ' ')
@@ -24,7 +27,7 @@ int get_minus(const char *fmt, int *index)
 		if (space && (del != 'i' || del != 'd'))
 			return (flag);
 	}
-	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	for (; fmt[i] > 31 && fmt[i] < 65;)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
@@ -49,13 +52,16 @@ int get_minus(const char *fmt, int *index)
 int get_plus(const char *fmt, int *index)
 {
 	int nxt_indx = *index + 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', ' '}, del;
+	char flag_in_chr[] = {'-', '+', '0', '#'}, del;
 	int flag = 0, i = nxt_indx, space = 1;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if ((fmt[*index + 2] == flag_in_chr[i]) && fmt[i] != '\0')
+		{
 			space = 0;
+			break;
+		}
 	}
 	i = nxt_indx;
 	if (fmt[i] == ' ')
@@ -64,7 +70,7 @@ int get_plus(const char *fmt, int *index)
 		if (space && (del != 'd' || del != 'i'))
 			return (flag);
 	}
-	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	for (; fmt[i] > 31 && fmt[i] < 65;)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
@@ -89,13 +95,16 @@ int get_plus(const char *fmt, int *index)
 int get_zero(const char *fmt, int *index)
 {
 	int nxt_indx = *index + 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', ' '}, del;
+	char flag_in_chr[] = {'-', '+', '0', '#'}, del;
 	int flag = 0, i = nxt_indx, space = 1;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if ((fmt[*index + 2] == flag_in_chr[i]) && fmt[i] != '\0')
+		{
 			space = 0;
+			break;
+		}
 	}
 	i = nxt_indx;
 	if (fmt[i] == ' ')
@@ -104,7 +113,7 @@ int get_zero(const char *fmt, int *index)
 		if (space && (del != 'd' || del != 'i'))
 			return (flag);
 	}
-	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	for (; fmt[i] > 31 && fmt[i] < 65;)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
@@ -129,13 +138,16 @@ int get_zero(const char *fmt, int *index)
 int get_hash(const char *fmt, int *index)
 {
 	int nxt_indx = *index + 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', ' '}, del;
+	char flag_in_chr[] = {'-', '+', '0', '#'}, del;
 	int flag = 0, i = nxt_indx, space = 1;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if ((fmt[*index + 2] == flag_in_chr[i]) && fmt[i] != '\0')
+		{
 			space = 0;
+			break;
+		}
 	}
 	i = nxt_indx;
 	if (fmt[i] == ' ')
@@ -144,7 +156,7 @@ int get_hash(const char *fmt, int *index)
 		if (space && (del != 'd' || del != 'i'))
 			return (flag);
 	}
-	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	for (; fmt[i] > 31 && fmt[i] < 65;)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)
@@ -169,10 +181,10 @@ int get_hash(const char *fmt, int *index)
 int get_space(const char *fmt, int *index)
 {
 	int nxt_indx = *index + 1;
-	char flag_in_chr[] = {'-', '+', '0', '#', ' '}, del;
-	int flag = 0, i = nxt_indx, space = 1;
+	char flag_in_chr[] = {'-', '+', '0', '#'}, del;
+	int flag = 0, i, space = 1;
 
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if ((fmt[*index + 2] == flag_in_chr[i]) && fmt[i] != '\0')
 			space = 0;
@@ -180,11 +192,13 @@ int get_space(const char *fmt, int *index)
 	i = nxt_indx;
 	if (fmt[i] == ' ')
 	{
-		del = fmt[*index + 2];
-		if (space && (del != 'd' && del != 'i'))
+		flag = check_space(fmt, i);
+		if (flag == 32)
+			return (flag);
+		if (space)
 			return (flag);
 	}
-	for (; (fmt[i] > 31 && fmt[i] < 65) || (fmt[i] == 'l' || fmt[i] == 'h');)
+	for (; fmt[i] > 31 && fmt[i] < 65;)
 	{
 		del = fmt[i];
 		if ((del > 64 && del < 91) || (del > 96 && del < 123)

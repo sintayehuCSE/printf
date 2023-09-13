@@ -45,8 +45,6 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 	int i = 0, j = 0, len, assgnd = 0;
 	char padd = ' ';
 
-	if (!precision)
-		return (0);
 	if (is_ngtive)
 		a[--id] = '-';
 	else if (space && !plus)
@@ -55,7 +53,9 @@ int write_number(int is_ngtive, char a[], int id, int minus, int plus,
 		a[--id] = '+';
 	len = (BUFFER_SIZE - id) - 1;
 	if ((zero && !minus) || precision > width)
-		padd = '0', width = precision, assgnd = 1;
+		padd = '0';
+	if (precision > width)
+		width = precision, assgnd = 1;
 	if (width > len)
 	{
 		for (; j < (width - len); j++)
@@ -98,8 +98,6 @@ int write_unsgnd(char array[], int index, int minus, int zero, int width,
 	char padd = ' ';
 	int i = 0;
 
-	if (!precision)
-		return (0);
 	if ((zero && !minus) || (precision > width))
 		padd = '0';
 	if (width < precision)
@@ -135,8 +133,6 @@ int write_octal(int num_case, char array[], int index, int minus, int zero,
 	char padd = ' ';
 	int i = 0;
 
-	if (!precision)
-		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = '0';
@@ -177,8 +173,6 @@ int write_hexa_lower(int num_case, char array[], int index, int minus,
 	char padd =  ' ';
 	int i = 0;
 
-	if (!precision)
-		return (0);
 	if (hash && !num_case)
 	{
 		array[--index] = 'x';

@@ -51,15 +51,14 @@ int _printf(const char *format, ...)
  */
 int get_delimiter(const char *fmt, int *index)
 {
-	int i = 0;
-	char del;
-	int space = 1;
-	char flag_in_chr[] = {'-', '+', '0', '#'};
+	int space = 1, i = 0;
+	char flag_in_chr[] = {'-', '+', '0', '#', 'l', 'h', 'd', 'i', '.', '*'}, del;
 
-	for (; i < 4; i++)
+	for (; i < 10; i++)
 	{
 		if (fmt[*index + 1] == ' ')
-			if (fmt[*index + 2] == flag_in_chr[i])
+			if ((fmt[*index + 2] == flag_in_chr[i]) || (fmt[*index + 2]
+				    > 47 && fmt[*index + 2] < 58))
 				space = 0;
 		if (fmt[*index + 1] != ' ')
 		{
@@ -69,9 +68,6 @@ int get_delimiter(const char *fmt, int *index)
 	}
 	if (space)
 	{
-		del = fmt[*index + 2];
-		if (del == 'd' || del == 'i')
-			return (*index + 2);
 		return (*index + 1);
 	}
 	i = *index;
