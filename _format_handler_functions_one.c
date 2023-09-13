@@ -129,12 +129,17 @@ int print_number(va_list ap, char array[], int minus, int plus, int zero,
 	long int num = va_arg(ap, long int);
 	int i = BUFFER_SIZE - 2;
 	int is_ngtive = 0;
+	int a = 0;
 	unsigned long int n;
 
 	UNUSED(hash);
 	num = cast_number(num, size);
 	if (!precision && num == 0)
-		return (write(1, " ", width));
+	{
+		for (; width > 0; width--)
+			a += (write(1, " ", 1));
+		return (a);
+	}
 	if (num == 0)
 		array[i--] = '0';
 	array[BUFFER_SIZE - 1] = '\0';
