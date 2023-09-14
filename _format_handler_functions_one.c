@@ -60,14 +60,22 @@ int print_string(va_list ap, char array[], int minus, int plus, int zero,
 	UNUSED(space);
 	if (str == NULL)
 	{
+		if (!precision && !width)
+			return (0);
 		return (write(1, "(null)", 6));
 	}
 	if (!precision)
+	{
+		if (width)
+			return (write(1, " ", width));
 		return (0);
+	}
 	while (str[len] != '\0')
 		len++;
-	if (precision != -1 && precision < len)
+	if ((precision != -1 && precision < len) && (precision >= width))
 		return (write(1, str, precision));
+	if (precision != -1 && precision < width)
+		len = precision;
 	if (width && (width > len))
 	{
 		for (; i < width - len; i++)
