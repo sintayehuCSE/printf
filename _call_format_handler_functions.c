@@ -50,8 +50,8 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 	}
 	if (fmt_typ[i].fmt == '\0')
 	{
-		if (format[*ind] == '\0')
-			return (-1);
+		if (format[*ind] == '\0' || format[*ind] == ' ')
+			return (invalid_format);
 		if (format[*ind] == 'l' || format[*ind] == 'h')
 			return (write(1, "%%", 1));
 		len += write(1, "%%", 1);
