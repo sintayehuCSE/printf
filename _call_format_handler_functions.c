@@ -53,7 +53,7 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 		if (format[*ind] == '\0')
 			return (invalid_format);
 		else if (format[*ind] == ' ')
-			return (write(1, &format[*ind], 1));
+			return (0);
 		if (format[*ind] == 'l' || format[*ind] == 'h')
 			return (write(1, "%%", 1));
 		len += write(1, "%%", 1);
