@@ -2,7 +2,7 @@
 /**
  * print_format - Call to the function that
  * will handle the specified format
- * @format: A formated string passed in by user in which
+ * @fmt: A formated string passed in by user in which
  *  to perform the formater
  * @ind: The index of character after format specifier
  * @arg_list: The list of variable argument to be printed
@@ -18,7 +18,7 @@
  *
  * Return: 1 or 2
  */
-int print_format(const char *format, int *ind, va_list arg_list, char array[],
+int print_format(const char *fmt, int *ind, va_list arg_list, char array[],
 		 int minus, int plus, int zero, int hash, int space, int size
 		 , int width, int precision)
 {
@@ -43,20 +43,20 @@ int print_format(const char *format, int *ind, va_list arg_list, char array[],
 
 	for (; fmt_typ[i].fmt != '\0'; i++)
 	{
-		if (format[*ind] == fmt_typ[i].fmt)
+		if (fmt[*ind] == fmt_typ[i].fmt)
 			return (fmt_typ[i].func(arg_list, array, minus, plus,
 						zero, hash, space, size, width,
 					precision));
 	}
 	if (fmt_typ[i].fmt == '\0')
 	{
-		if (format[*ind] == ' ' && format[*ind + 1] == '\0')
+		if ((fmt[*ind] == '\0') || (fmt[*ind] == ' ' && fmt[*ind + 1] == '\0'))
 			return (invalid_format);
-		if (format[*ind] == 'l' || format[*ind] == 'h')
+		if (fmt[*ind] == 'l' || fmt[*ind] == 'h')
 			return (write(1, "%%", 1));
 		len += write(1, "%%", 1);
-		len += write(1, &format[*ind], 1);
-		if (format[*ind] == ' ')
+		len += write(1, &fmt[*ind], 1);
+		if (fmt[*ind] == ' ')
 			*ind += 2;
 		return (len);
 	}

@@ -36,7 +36,7 @@ struct print_type
 typedef struct print_type type;
 int _putchar(char c);
 int _printf(const char *format, ...);
-int print_format(const char *format, int *ind, va_list arg_list, char array[],
+int print_format(const char *fmt, int *ind, va_list arg_list, char array[],
 		 int minus, int plus, int zero, int hash, int space, int size
 		 , int width, int precision);
 
