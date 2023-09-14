@@ -48,13 +48,11 @@ int write_hexa_upper(int num_case, char array[], int index, int minus, int zero
  */
 int write_non_printable(char array[])
 {
-	int i = 0;
 	int len = 0;
 
-	while (array[i] != '\0')
+	while (array[len])
 	{
 		len++;
-		i++;
 	}
 	return (write(1, array, len));
 }

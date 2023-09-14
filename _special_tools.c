@@ -22,8 +22,8 @@ int check_printable(char c)
 void add_hexa_code(char array[], int *index, char c)
 {
 	char base_16[] = "0123456789ABCDEF";
-	int i = 0;
-	char hexa[2];
+	int i = 1;
+	char hexa[3];
 
 	if (c < 0)
 		c *= -1;
@@ -31,6 +31,7 @@ void add_hexa_code(char array[], int *index, char c)
 	*index += 1;
 	array[*index] = 'x';
 	*index += 1;
+	hexa[2] = '\0';
 	if (c <= 15)
 	{
 		array[*index] = '0';
@@ -43,16 +44,16 @@ void add_hexa_code(char array[], int *index, char c)
 	while (c)
 	{
 		hexa[i] = base_16[c % 16];
-		i++;
+		i--;
 		c = c / 16;
 		if (c == 0)
-			i--;
+			i++;
 	}
-	while (i >= 0)
+	while (i >= 0 && hexa[i])
 	{
 		array[*index] = hexa[i];
-		i--;
-		if ((i != 0) && (i != -1))
+		i++;
+		if (i != 2)
 			*index += 1;
 	}
 }
